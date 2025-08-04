@@ -13,7 +13,7 @@ class WiFiScanner:
 
         results = self.iface.scan_results()
         for r in results:
-            if "x00" | "xd0" | "xa" not in r.ssid:
+            if not any(x in r.ssid for x in ["x00", "xd0", "xa"]):
                 self.ssid = r.ssid 
                 self.speed = r.signal+100
                 self.widiDict[self.ssid] = self.speed
